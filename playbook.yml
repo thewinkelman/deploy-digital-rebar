@@ -13,7 +13,7 @@
         repo: 'https://github.com/digitalrebar/digitalrebar'
         dest: /root/digitalrebar/
 
-    - name: run the prerequesite-cheker-thinger
+    - name: run the prerequesite-checker-thinger
       shell: /root/digitalrebar/deploy/run-in-system.sh --help
       args:
         chdir: /root/digitalrebar/deploy/
