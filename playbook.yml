@@ -13,7 +13,16 @@
         repo: 'https://github.com/digitalrebar/digitalrebar'
         dest: /root/digitalrebar/
 
+    - name: get my IP address
+      shell: ip -4 addr | grep inet | grep -v 'host lo' | awk '{print $2}'
+      register: result
+
     - name: run the prerequesite-checker-thinger
       shell: /root/digitalrebar/deploy/run-in-system.sh --help
+      args:
+        chdir: /root/digitalrebar/deploy/
+
+    - name: run the install script for admin node
+      shell: /root/digitalrebar/deploy/run-in-system.sh --deploy-admin=local --admin-ip={{ result.stdout }}
       args:
         chdir: /root/digitalrebar/deploy/
