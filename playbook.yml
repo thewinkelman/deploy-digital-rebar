@@ -1,0 +1,19 @@
+---
+
+- hosts: all
+  become: 'yes'
+
+  tasks:
+    - name: install git
+      package:
+        name: git
+
+    - name: install the digitalrebar deploy tools
+      git:
+        repo: 'https://github.com/digitalrebar/digitalrebar'
+        dest: /root/digitalrebar/
+
+    - name: run the prerequesite-cheker-thinger
+      shell: /root/digitalrebar/deploy/run-in-system.sh --help
+      args:
+        chdir: /root/digitalrebar/deploy/
